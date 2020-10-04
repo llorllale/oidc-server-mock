@@ -1,5 +1,4 @@
-﻿using System;
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using OpenIdConnectServer.Helpers;
@@ -25,6 +24,9 @@ namespace OpenIdConnectServer
                     .AddInMemoryApiScopes(Config.GetApiScopes())
                     .AddInMemoryClients(Config.GetClients())
                     .AddTestUsers(Config.GetUsers());
+
+            var aspNetServicesOptions = Config.GetAspNetServicesOptions();
+            AspNetServicesHelper.ApplyAspNetServicesOptions(services, aspNetServicesOptions);
 
             services.AddRouting();
             services.AddCors();
